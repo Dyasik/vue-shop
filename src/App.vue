@@ -1,18 +1,100 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Products :groupedProducts="groupedProducts"/>
+<!--    <Cart/>-->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Products from './components/Products'
+// import Cart from './components/Cart'
+
+import store from './store'
+import api from './api'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    Products,
+    // Cart,
+  },
+  async created() {
+    await this.loadAllProducts()
+    this.loadAvailableProducts()
+  },
+  data() {
+    return {
+      privateState: {
+        allProducts: {},
+        rawAvailableProducts: [],
+      },
+      store,
+    }
+  },
+  computed: {
+    groupedProducts: function () {
+      const { allProducts, rawAvailableProducts } = this.privateState;
+      const groupedProducts = {}
+
+      rawAvailableProducts.forEach(p => {
+        const groupId = p.G
+        const productId = String(p.T)
+        const category = allProducts[groupId]
+
+        if (!groupedProducts[groupId]) {
+          groupedProducts[groupId] = {
+            title: category.G,
+            products: [],
+          }
+
+          if (category.C) {
+            groupedProducts[groupId].columns = category.C
+          }
+        }
+
+        groupedProducts[groupId].products.push({
+          productId,
+          count: p.P,
+          price: p.C,
+          name: category.B[productId].N,
+        });
+      })
+
+      console.log('New groupedProducts:', groupedProducts)
+
+      return groupedProducts
+    }
+  },
+  methods: {
+    // designed to load once on app load
+    async loadAllProducts() {
+      let products;
+
+      try {
+        products = await api.getAllProducts()
+      } catch (e) {
+        alert('Failed to load products')
+        console.warn('Failed to load products:', e)
+      }
+
+      if (products) {
+        this.privateState.allProducts = products
+      }
+    },
+
+    async loadAvailableProducts() {
+      let products;
+
+      try {
+        products = await api.getAvailableProducts()
+      } catch (e) {
+        alert('Failed to load available products')
+        console.warn('Failed to load available products:', e)
+      }
+
+      this.privateState.rawAvailableProducts = products.Value.Goods
+    },
+  },
 }
 </script>
 
