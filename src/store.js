@@ -1,30 +1,32 @@
-export default {
-  // set to `true` to see logs from every action
-  debug: true,
+import Vue from 'vue'
+import Vuex from 'vuex'
 
+Vue.use(Vuex)
+
+export const MUTATIONS = {
+  SET_ALL_PRODUCTS: 'setAllProducts',
+  SET_AVAILABLE_PRODUCTS: 'setAvailableProducts',
+  ADD_PRODUCT_TO_CART: 'addProductToCart',
+}
+
+export default new Vuex.Store({
   state: {
     allProducts: {},
     availableProducts: [],
     cart: [],
   },
 
-  setAllProducts(products) {
-    this._log('setAllProducts > called with', products)
-    this.state.allProducts = products
-  },
+  mutations: {
+    [MUTATIONS.SET_ALL_PRODUCTS](state, products) {
+      state.allProducts = products
+    },
 
-  setAvailableProducts(products) {
-    this._log('setAvailableProducts > called with', products)
-    this.state.availableProducts = products
-  },
+    [MUTATIONS.SET_AVAILABLE_PRODUCTS](state, products) {
+      state.availableProducts = products
+    },
 
-  addProductToCart(product) {
-    this._log('addProductToCart > called with', product)
+    [MUTATIONS.ADD_PRODUCT_TO_CART](state, product) {
+      console.log('addProductToCart > called with', product)
+    },
   },
-
-  _log(...args) {
-    if (this.debug) {
-      console.log(...args)
-    }
-  }
-}
+})

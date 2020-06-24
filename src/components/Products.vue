@@ -1,23 +1,30 @@
 <template>
   <div class="products">
     <Category
-        v-for="(category, id) in groupedProducts"
+        v-for="(category, id) in products"
         :key="id"
-        v-bind="category"
-    />
+        :title="category.title"
+        :columns="category.columns"
+    >
+      <Product
+          v-for="product in category.products"
+          :key="product.productId"
+          v-bind="product"
+      />
+    </Category>
   </div>
 </template>
 
 <script>
   import Category from './product-components/Category'
+  import Product from './product-components/Product';
 
   export default {
     name: 'Products',
-    components: {Category},
-    props: {
-      groupedProducts: {
-        type: Object,
-        required: true,
+    components: {Product, Category},
+    computed: {
+      products: function () {
+        return this.$store.state.availableProducts
       },
     },
   }

@@ -9,8 +9,7 @@
 import Products from './components/Products'
 // import Cart from './components/Cart'
 
-import store from './store'
-
+import { MUTATIONS } from './store';
 import api from './services/api'
 import parseAvailableProducts from './services/availableProductsParser'
 
@@ -24,11 +23,6 @@ export default {
     await this.loadAllProducts()
     await this.loadAvailableProducts()
   },
-  data() {
-    return {
-      store,
-    }
-  },
   methods: {
     async loadAllProducts() {
       let products;
@@ -41,7 +35,7 @@ export default {
       }
 
       if (products) {
-        this.store.setAllProducts(products)
+        this.$store.commit(MUTATIONS.SET_ALL_PRODUCTS, products)
       }
     },
 
@@ -56,11 +50,11 @@ export default {
       }
 
       if (response) {
-        const { allProducts } = this.store.state;
+        const { allProducts } = this.$store.state;
         const products = response.Value.Goods
         const availableProducts = parseAvailableProducts(allProducts, products)
 
-        this.store.setAvailableProducts(availableProducts)
+        this.$store.commit(MUTATIONS.SET_AVAILABLE_PRODUCTS, availableProducts)
       }
     },
   },

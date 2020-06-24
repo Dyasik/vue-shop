@@ -1,28 +1,18 @@
 <template>
   <div class="category">
-    <div class="header">{{ title }} ({{ products.length }})</div>
+    <div class="header">{{ title }}</div>
     <div class="body">
-      <Product
-          v-for="product in products"
-          :key="product.productId"
-          v-bind="product"
-      />
+      <slot/>
     </div>
   </div>
 </template>
 
 <script>
-  import Product from './Product';
   export default {
     name: 'Category',
-    components: {Product},
     props: {
       title: {
         type: String,
-        required: true,
-      },
-      products: {
-        type: Array,
         required: true,
       },
       columns: {
