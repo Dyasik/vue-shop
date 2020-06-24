@@ -1,11 +1,30 @@
 export default {
+  // set to `true` to see logs from every action
   debug: true,
+
   state: {
+    allProducts: {},
+    availableProducts: [],
     cart: [],
   },
-  addProductToCart(product) {
-    if (this.debug) console.log('addProductToCart > called with', product)
 
-
+  setAllProducts(products) {
+    this._log('setAllProducts > called with', products)
+    this.state.allProducts = products
   },
+
+  setAvailableProducts(products) {
+    this._log('setAvailableProducts > called with', products)
+    this.state.availableProducts = products
+  },
+
+  addProductToCart(product) {
+    this._log('addProductToCart > called with', product)
+  },
+
+  _log(...args) {
+    if (this.debug) {
+      console.log(...args)
+    }
+  }
 }
