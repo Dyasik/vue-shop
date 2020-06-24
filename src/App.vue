@@ -46,17 +46,21 @@ export default {
     },
 
     async loadAvailableProducts() {
-      let products;
+      let response;
 
       try {
-        products = await api.getAvailableProducts()
+        response = await api.getAvailableProducts()
       } catch (e) {
         alert('Failed to load available products')
         console.warn('Failed to load available products:', e)
       }
 
-      if (products) {
-        this.store.setAvailableProducts(parseAvailableProducts(products))
+      if (response) {
+        const { allProducts } = this.store.state;
+        const products = response.Value.Goods
+        const availableProducts = parseAvailableProducts(allProducts, products)
+
+        this.store.setAvailableProducts(availableProducts)
       }
     },
   },
