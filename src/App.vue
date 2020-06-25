@@ -62,12 +62,17 @@ export default {
 </script>
 
 <style>
+body {
+  background-color: #333;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Helvetica, Arial, sans-serif;
+  line-height: 1.5em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: ivory;
   margin-top: 60px;
 }
 </style>

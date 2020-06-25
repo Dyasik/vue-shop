@@ -36,11 +36,22 @@
 <style scoped>
   .product {
     display: flex;
+    justify-content: space-between;
+    padding: 4px;
+  }
+
+  .product:not(:last-child) {
+    border-bottom: 1px solid #777;
   }
 
   .price {
-    width: 40px;
+    width: 80px;
+    align-self: center;
+    flex-shrink: 0;
+    font-size: 0.8em;
     font-weight: bold;
-    background-color: lightgray;
+    color: darkorange;
+    border: 1px solid;
+    border-radius: 4px;
   }
 </style>
