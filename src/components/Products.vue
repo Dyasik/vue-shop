@@ -35,7 +35,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  max-height: 100vh;
   max-width: 1100px;
   margin: auto;
   overflow-y: auto;
