@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import formatPrice from '../../filters/formatPrice'
+  import formatPrice from '../../filters/priceFormatter'
 
   export default {
     name: 'CartProduct',

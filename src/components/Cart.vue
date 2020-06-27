@@ -39,7 +39,7 @@
 
 <script>
   import { MUTATIONS } from '../store'
-  import formatPrice from '../filters/formatPrice'
+  import formatPrice from '../filters/priceFormatter'
   import CartProduct from './cart-components/CartProduct';
 
   export default {

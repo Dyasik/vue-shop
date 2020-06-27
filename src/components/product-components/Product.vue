@@ -14,7 +14,7 @@
 
 <script>
   import { MUTATIONS } from '../../store'
-  import formatPrice from '../../filters/formatPrice'
+  import formatPrice from '../../filters/priceFormatter'
 
   export default {
     name: 'Product',
