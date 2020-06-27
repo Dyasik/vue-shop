@@ -4,7 +4,7 @@
       {{ name }} ({{ count }})
     </div>
     <div class="price">
-      {{ price }}
+      {{ price | formatPrice }}&nbsp;₽
     </div>
   </div>
 </template>
@@ -30,6 +30,15 @@
         required: true,
       },
     },
+    filters: {
+      formatPrice(price) {
+        let [ whole, fraction ] = String(price).split(/[,.]/)
+
+        fraction = fraction?.padEnd(2, '0') || '00';
+
+        return whole + '.' + fraction
+      },
+    },
   }
 </script>
 
@@ -37,7 +46,7 @@
   .product {
     display: flex;
     justify-content: space-between;
-    padding: 4px;
+    padding: 4px 4px 4px 8px;
   }
 
   .product:not(:last-child) {
