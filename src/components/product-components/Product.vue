@@ -1,5 +1,5 @@
 <template>
-  <div class="product">
+  <div class="product" @click="addToCart">
     <div class="name">
       {{ name }} ({{ count }})
     </div>
@@ -10,6 +10,8 @@
 </template>
 
 <script>
+  import { MUTATIONS } from '../../store'
+
   export default {
     name: 'Product',
     props: {
@@ -39,6 +41,11 @@
         return whole + '.' + fraction
       },
     },
+    methods: {
+      addToCart() {
+        this.$store.commit(MUTATIONS.ADD_PRODUCT_TO_CART, this.productId)
+      },
+    },
   }
 </script>
 
@@ -62,5 +69,6 @@
     color: darkorange;
     border: 1px solid;
     border-radius: 4px;
+    cursor: pointer;
   }
 </style>

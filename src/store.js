@@ -15,7 +15,7 @@ export default new Vuex.Store({
   state: {
     allProducts: {},
     rawAvailableProducts: [],
-    cart: [],
+    cart: {},
     currencyFactor: 65,
   },
 
@@ -24,6 +24,27 @@ export default new Vuex.Store({
       const { allProducts, rawAvailableProducts, currencyFactor } = state
 
       return parseAvailableProducts(allProducts, rawAvailableProducts, currencyFactor)
+    },
+
+    cartProducts: (state, getters) => {
+      const { cart } = state
+      const { products } = getters
+      const selectedProductsIds = Object.keys(cart).map(id => +id)
+      const cartProducts = {}
+
+      for (const category of Object.values(products)) {
+        const selectedProductsFromCategory = category.products
+          .filter(p => selectedProductsIds.includes(p.productId))
+
+        if (selectedProductsFromCategory.length) {
+          cartProducts[category.title] = selectedProductsFromCategory.map(p => ({
+            product: p,
+            count: cart[p.productId],
+          }))
+        }
+      }
+
+      return cartProducts
     },
   },
 
@@ -36,8 +57,14 @@ export default new Vuex.Store({
       state.rawAvailableProducts = products
     },
 
-    [MUTATIONS.ADD_PRODUCT_TO_CART](state, product) {
-      console.log('addProductToCart > called with', product)
+    [MUTATIONS.ADD_PRODUCT_TO_CART](state, productId) {
+      const { cart } = state;
+
+      if (cart[productId]) {
+        cart[productId]++
+      } else {
+        Vue.set(cart, productId, 1)
+      }
     },
   },
 })

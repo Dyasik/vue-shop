@@ -1,22 +1,22 @@
 <template>
   <div id="app">
     <Products/>
-<!--    <Cart/>-->
+    <Cart/>
   </div>
 </template>
 
 <script>
 import Products from './components/Products'
-// import Cart from './components/Cart'
+import Cart from './components/Cart'
 
-import { MUTATIONS } from './store';
+import { MUTATIONS } from './store'
 import api from './services/api'
 
 export default {
   name: 'App',
   components: {
     Products,
-    // Cart,
+    Cart,
   },
   async created() {
     await this.loadAllProducts()
