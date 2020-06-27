@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import parseAvailableProducts from './services/availableProductsParser'
+
 Vue.use(Vuex)
 
 export const MUTATIONS = {
@@ -12,8 +14,17 @@ export const MUTATIONS = {
 export default new Vuex.Store({
   state: {
     allProducts: {},
-    availableProducts: [],
+    rawAvailableProducts: [],
     cart: [],
+    currencyFactor: 65,
+  },
+
+  getters: {
+    products: state => {
+      const { allProducts, rawAvailableProducts, currencyFactor } = state
+
+      return parseAvailableProducts(allProducts, rawAvailableProducts, currencyFactor)
+    },
   },
 
   mutations: {
@@ -22,7 +33,7 @@ export default new Vuex.Store({
     },
 
     [MUTATIONS.SET_AVAILABLE_PRODUCTS](state, products) {
-      state.availableProducts = products
+      state.rawAvailableProducts = products
     },
 
     [MUTATIONS.ADD_PRODUCT_TO_CART](state, product) {

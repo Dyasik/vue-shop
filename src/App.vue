@@ -11,7 +11,6 @@ import Products from './components/Products'
 
 import { MUTATIONS } from './store';
 import api from './services/api'
-import parseAvailableProducts from './services/availableProductsParser'
 
 export default {
   name: 'App',
@@ -50,11 +49,8 @@ export default {
       }
 
       if (response) {
-        const { allProducts } = this.$store.state;
         const products = response.Value.Goods
-        const availableProducts = parseAvailableProducts(allProducts, products)
-
-        this.$store.commit(MUTATIONS.SET_AVAILABLE_PRODUCTS, availableProducts)
+        this.$store.commit(MUTATIONS.SET_AVAILABLE_PRODUCTS, products)
       }
     },
   },

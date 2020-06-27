@@ -24,7 +24,7 @@
     components: {Product, Category},
     computed: {
       products: function () {
-        return this.$store.state.availableProducts
+        return this.$store.getters.products
       },
     },
   }
