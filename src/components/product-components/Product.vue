@@ -11,6 +11,7 @@
 
 <script>
   import { MUTATIONS } from '../../store'
+  import formatPrice from '../../filters/formatPrice'
 
   export default {
     name: 'Product',
@@ -33,13 +34,7 @@
       },
     },
     filters: {
-      formatPrice(price) {
-        let [ whole, fraction ] = String(price).split(/[,.]/)
-
-        fraction = fraction?.padEnd(2, '0') || '00';
-
-        return whole + '.' + fraction
-      },
+      formatPrice,
     },
     methods: {
       addToCart() {
