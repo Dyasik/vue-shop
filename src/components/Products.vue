@@ -16,7 +16,7 @@
 
 <script>
   import Category from './product-components/Category'
-  import Product from './product-components/Product';
+  import Product from './product-components/Product'
 
   export default {
     name: 'Products',
@@ -34,7 +34,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  max-width: 1100px;
+  justify-content: space-between;
   margin: auto;
   overflow-y: auto;
 }

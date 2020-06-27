@@ -35,11 +35,12 @@
 
 <style scoped>
   .category {
-    flex-basis: calc(49% - 10px);
+    flex-basis: calc(50% - 5px);
     border: 1px solid #777;
     border-radius: 3px;
+    box-sizing: border-box;
     overflow: hidden;
-    margin: 5px;
+    margin: 5px 0;
   }
 
   .header {

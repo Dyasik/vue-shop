@@ -9,6 +9,7 @@ export const MUTATIONS = {
   SET_ALL_PRODUCTS: 'setAllProducts',
   SET_AVAILABLE_PRODUCTS: 'setAvailableProducts',
   ADD_PRODUCT_TO_CART: 'addProductToCart',
+  CLEAR_CART: 'clearCart',
 }
 
 export default new Vuex.Store({
@@ -58,13 +59,17 @@ export default new Vuex.Store({
     },
 
     [MUTATIONS.ADD_PRODUCT_TO_CART](state, productId) {
-      const { cart } = state;
+      const { cart } = state
 
       if (cart[productId]) {
         cart[productId]++
       } else {
         Vue.set(cart, productId, 1)
       }
+    },
+
+    [MUTATIONS.CLEAR_CART](state) {
+      state.cart = {}
     },
   },
 })

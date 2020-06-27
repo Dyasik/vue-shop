@@ -21,7 +21,7 @@ export default (price) => {
   whole = chars.join('')
 
   // pad fractional part with zeroes
-  fraction = fraction?.padEnd(2, '0') || '00';
+  fraction = fraction?.padEnd(2, '0') || '00'
 
-  return whole + '.' + fraction
+  return whole + '.' + fraction + '\u00A0₽'
 }

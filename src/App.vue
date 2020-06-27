@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     async loadAllProducts() {
-      let products;
+      let products
 
       try {
         products = await api.getAllProducts()
@@ -39,7 +39,7 @@ export default {
     },
 
     async loadAvailableProducts() {
-      let response;
+      let response
 
       try {
         response = await api.getAvailableProducts()
@@ -69,6 +69,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: ivory;
-  margin-top: 60px;
+  margin: auto;
+  max-width: 1100px;
 }
 </style>
