@@ -11,10 +11,6 @@ export default function (allProducts, rawAvailableProducts, currencyFactor) {
         title: category.G,
         products: [],
       }
-
-      if (category.C) {
-        availableProducts[groupId].columns = category.C
-      }
     }
 
     availableProducts[groupId].products.push({

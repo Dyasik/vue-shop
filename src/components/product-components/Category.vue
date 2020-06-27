@@ -19,10 +19,6 @@
         type: String,
         required: true,
       },
-      columns: {
-        type: Number,
-        default: 1,
-      },
     },
     data: function () {
       return {
@@ -83,7 +79,7 @@
     max-height: 0;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 800px) {
     .category {
       flex-basis: calc(100% - 10px);
     }

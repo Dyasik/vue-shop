@@ -4,7 +4,6 @@
         v-for="(category, id) in products"
         :key="id"
         :title="category.title"
-        :columns="category.columns"
     >
       <Product
           v-for="product in category.products"
