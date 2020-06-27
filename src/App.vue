@@ -63,7 +63,8 @@ body {
 }
 
 #app {
-  font-family: Helvetica, Arial, sans-serif;
+  /* Added -apple-system font to support ₽ sign on iOS */
+  font-family: -apple-system, Helvetica, Arial, sans-serif;
   line-height: 1.5em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -1,3 +1,7 @@
+const PRICE_DELIMITER = '.'
+const NBSP = '\u00A0'
+const CURRENCY_SYMBOL = '₽'
+
 export default (price) => {
   let [ whole, fraction ] = String(price).split(/[,.]/)
 
@@ -23,5 +27,5 @@ export default (price) => {
   // pad fractional part with zeroes
   fraction = fraction?.padEnd(2, '0') || '00'
 
-  return whole + '.' + fraction + '\u00A0₽'
+  return whole + PRICE_DELIMITER + fraction + NBSP + CURRENCY_SYMBOL
 }
