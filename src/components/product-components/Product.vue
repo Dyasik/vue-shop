@@ -14,7 +14,7 @@
     name: 'Product',
     props: {
       productId: {
-        type: String,
+        type: Number,
         required: true,
       },
       name: {

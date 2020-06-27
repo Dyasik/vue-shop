@@ -3,7 +3,7 @@ export default function (allProducts, rawAvailableProducts) {
 
   rawAvailableProducts.forEach(p => {
     const groupId = p.G
-    const productId = String(p.T)
+    const productId = p.T
     const category = allProducts[groupId]
 
     if (!availableProducts[groupId]) {
