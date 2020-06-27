@@ -51,8 +51,10 @@
     },
     methods: {
       addToCart() {
-        this.$store.commit(MUTATIONS.ADD_PRODUCT_TO_CART, this.productId)
-        this.showCartPopup()
+        if (this.$store.getters.canAddProductToCart(this.productId)) {
+          this.$store.commit(MUTATIONS.ADD_PRODUCT_TO_CART, this.productId)
+          this.showCartPopup()
+        }
       },
       showCartPopup() {
         this.popupTimeout = setTimeout(this.hideCartTimeout, 1500, ++this.lastPopupId)

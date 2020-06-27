@@ -27,6 +27,7 @@
             :key="cartItem.product.productId"
             :product-id="cartItem.product.productId"
             :name="cartItem.product.name"
+            :count="cartItem.product.count"
             :price="cartItem.product.price"
             :items-count="cartItem.count"
         />

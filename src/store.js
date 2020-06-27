@@ -11,6 +11,7 @@ export const MUTATIONS = {
   ADD_PRODUCT_TO_CART: 'addProductToCart',
   CLEAR_CART: 'clearCart',
   REMOVE_CART_PRODUCT: 'removeCartProduct',
+  SET_CART_PRODUCT_COUNT: 'setCartProductCount',
 }
 
 export default new Vuex.Store({
@@ -28,9 +29,7 @@ export default new Vuex.Store({
       return parseAvailableProducts(allProducts, rawAvailableProducts, currencyFactor)
     },
 
-    cartProducts: (state, getters) => {
-      const { cart } = state
-      const { products } = getters
+    cartProducts: ({ cart }, { products }) => {
       const selectedProductsIds = Object.keys(cart).map(id => +id)
       const cartProducts = {}
 
@@ -47,6 +46,21 @@ export default new Vuex.Store({
       }
 
       return cartProducts
+    },
+
+    canAddProductToCart: ({ cart }, { products }) => productId => {
+      const currentCount = cart[productId]
+
+      if (!currentCount) {
+        return true
+      }
+
+      const { count: maxCount } = Object.values(products)
+        .map(category => category.products)
+        .flat()
+        .find(p => p.productId === productId)
+
+      return currentCount < maxCount
     },
   },
 
@@ -75,6 +89,17 @@ export default new Vuex.Store({
 
     [MUTATIONS.REMOVE_CART_PRODUCT](state, productId) {
       Vue.delete(state.cart, productId)
-    }
+    },
+
+    [MUTATIONS.SET_CART_PRODUCT_COUNT](state, { productId, newCount }) {
+      const { cart } = state
+
+      if (!cart[productId]) {
+        console.warn('You can only set new count for a product that is already in the cart. pid:', productId)
+        return
+      }
+
+      cart[productId] = newCount
+    },
   },
 })
