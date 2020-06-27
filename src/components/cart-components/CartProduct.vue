@@ -6,11 +6,13 @@
     <div class="count">{{ itemsCount }}</div>
     <div>&equals;</div>
     <div class="cost">{{ cost | formatPrice }}</div>
+    <div class="remove" @click="removeItem">❌</div>
   </div>
 </template>
 
 <script>
   import formatPrice from '../../filters/priceFormatter'
+  import { MUTATIONS } from '../../store'
 
   export default {
     name: 'CartProduct',
@@ -37,6 +39,11 @@
         return this.price * this.itemsCount
       },
     },
+    methods: {
+      removeItem() {
+        this.$store.commit(MUTATIONS.REMOVE_CART_PRODUCT, this.productId)
+      }
+    },
     filters: {
       formatPrice,
     }
@@ -47,5 +54,9 @@
   .cart-product {
     display: flex;
     justify-content: space-between;
+  }
+
+  .remove {
+    cursor: pointer;
   }
 </style>

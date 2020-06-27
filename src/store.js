@@ -10,6 +10,7 @@ export const MUTATIONS = {
   SET_AVAILABLE_PRODUCTS: 'setAvailableProducts',
   ADD_PRODUCT_TO_CART: 'addProductToCart',
   CLEAR_CART: 'clearCart',
+  REMOVE_CART_PRODUCT: 'removeCartProduct',
 }
 
 export default new Vuex.Store({
@@ -71,5 +72,9 @@ export default new Vuex.Store({
     [MUTATIONS.CLEAR_CART](state) {
       state.cart = {}
     },
+
+    [MUTATIONS.REMOVE_CART_PRODUCT](state, productId) {
+      Vue.delete(state.cart, productId)
+    }
   },
 })
