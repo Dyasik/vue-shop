@@ -12,6 +12,7 @@ export const MUTATIONS = {
   CLEAR_CART: 'clearCart',
   REMOVE_CART_PRODUCT: 'removeCartProduct',
   SET_CART_PRODUCT_COUNT: 'setCartProductCount',
+  SET_CURRENCY_FACTOR: 'setCurrencyFactor',
 }
 
 export default new Vuex.Store({
@@ -100,6 +101,10 @@ export default new Vuex.Store({
       }
 
       cart[productId] = newCount
+    },
+
+    [MUTATIONS.SET_CURRENCY_FACTOR](state, newFactor) {
+      state.currencyFactor = newFactor
     },
   },
 })

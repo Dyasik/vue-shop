@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Currency/>
     <Products/>
     <Cart/>
   </div>
@@ -8,6 +9,7 @@
 <script>
 import Products from './components/Products'
 import Cart from './components/Cart'
+import Currency from './components/Currency'
 
 import { MUTATIONS } from './store'
 import api from './services/api'
@@ -17,6 +19,7 @@ export default {
   components: {
     Products,
     Cart,
+    Currency,
   },
   async created() {
     await this.loadAllProducts()
