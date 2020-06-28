@@ -3,6 +3,7 @@
     <div class="name">{{ name }}</div>
     <div class="price">{{ price | formatPrice }}</div>
     <div class="times">&times;</div>
+    <div class="count-button" @click="decreaseCount">&ndash;</div>
     <input
         type="number"
         step="1"
@@ -12,6 +13,11 @@
         @change="handleNewCount($event)"
         :value="itemsCount"
     />
+    <div
+        class="count-button"
+        :class="{ disabled: !canIncreaseCount }"
+        @click="increaseCount"
+    >+</div>
     <div>&equals;</div>
     <div class="cost">{{ cost | formatPrice }}</div>
     <div class="remove" @click="removeItem">❌</div>
@@ -50,6 +56,9 @@
       cost: function () {
         return this.price * this.itemsCount
       },
+      canIncreaseCount: function () {
+        return this.$store.getters.canAddProductToCart(this.productId)
+      },
     },
     methods: {
       removeItem() {
@@ -71,6 +80,21 @@
       isCountValid(count) {
         return Number.isInteger(count) && count > 0 && count <= this.count
       },
+      increaseCount() {
+        if (this.canIncreaseCount) {
+          this.$store.commit(MUTATIONS.ADD_PRODUCT_TO_CART, this.productId)
+        }
+      },
+      decreaseCount() {
+        if (this.itemsCount === 1) {
+          this.removeItem()
+        } else {
+          this.$store.commit(MUTATIONS.SET_CART_PRODUCT_COUNT, {
+            productId: this.productId,
+            newCount: this.itemsCount - 1,
+          })
+        }
+      },
     },
     filters: {
       formatPrice,
@@ -82,6 +106,7 @@
   .cart-product {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 10px 0;
   }
 
@@ -100,8 +125,27 @@
 
   .count {
     width: 40px;
+    height: 30px;
     text-align: right;
     box-sizing: border-box;
+  }
+
+  .count-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    color: darkorange;
+    border: 1px solid;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    opacity: .5;
   }
 
   .cost {
@@ -130,7 +174,7 @@
     }
 
     .price {
-      width: 50%;
+      width: 40%;
     }
 
     .times {
@@ -138,7 +182,7 @@
     }
 
     .count {
-      width: 30%;
+      width: calc(40% - 60px);
     }
 
     .cost {
