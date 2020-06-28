@@ -82,9 +82,35 @@
   .cart-product {
     display: flex;
     justify-content: space-between;
+    padding: 10px 0;
+  }
+
+  .cart-product:not(:last-child) {
+    border-bottom: 1px solid #777;
+  }
+
+  .cart-product > * {
+    margin: 0 5px;
+  }
+
+  .name {
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .count {
+    width: 40px;
+    text-align: right;
+  }
+
+  .cost {
+    width: 130px;
+    text-align: right;
+    font-weight: bold;
   }
 
   .remove {
     cursor: pointer;
+    margin-left: 15px;
   }
 </style>

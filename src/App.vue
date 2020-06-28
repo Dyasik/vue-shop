@@ -58,19 +58,34 @@ export default {
 </script>
 
 <style>
-body {
-  background-color: #333;
-}
+  body {
+    background-color: #333;
+  }
 
-#app {
-  /* Added -apple-system font to support ₽ sign on iOS */
-  font-family: -apple-system, Helvetica, Arial, sans-serif;
-  line-height: 1.5em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: ivory;
-  margin: auto;
-  max-width: 1100px;
-}
+  #app {
+    /* Added -apple-system font to support ₽ sign on iOS */
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    line-height: 1.5em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: ivory;
+    margin: auto;
+    max-width: 1100px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #444;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #777;
+    width: 4px;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px #444;
+  }
 </style>

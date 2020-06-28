@@ -57,21 +57,6 @@
     overflow-y: auto;
   }
 
-  .body::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  .body::-webkit-scrollbar-track {
-    background-color: #444;
-  }
-
-  .body::-webkit-scrollbar-thumb {
-    background-color: #777;
-    width: 4px;
-    border-radius: 4px;
-    box-shadow: inset 0 0 0 1px #444;
-  }
-
   .category.collapsed .header {
     border-bottom: none;
   }
