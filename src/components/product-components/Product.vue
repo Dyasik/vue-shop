@@ -1,5 +1,5 @@
 <template>
-  <div class="product" @click="addToCart">
+  <div class="product" :class="stonksDeltaClass" @click="addToCart">
     <div class="name">
       {{ name }} ({{ count }})
     </div>
@@ -44,7 +44,19 @@
         popupTimeout: null,
         // to avoid race condition
         lastPopupId: 0,
+        stonksDeltaClass: '',
       }
+    },
+    watch: {
+      price: function (newPrice, oldPrice) {
+        if (newPrice > oldPrice) {
+          this.stonksDeltaClass = 'up'
+        } else if (newPrice < oldPrice) {
+          this.stonksDeltaClass = 'down'
+        } else {
+          this.stonksDeltaClass = ''
+        }
+      },
     },
     destroyed() {
       clearTimeout(this.popupTimeout)
@@ -79,6 +91,14 @@
     border-bottom: 1px solid #777;
   }
 
+  .product.up {
+    background-color: #4e2a2a;
+  }
+
+  .product.down {
+    background-color: #304c30;
+  }
+
   .price {
     position: relative;
     width: 80px;
@@ -90,6 +110,7 @@
     border: 1px solid;
     border-radius: 4px;
     cursor: pointer;
+    background-color: #333;
   }
 
   .cart-popup {
