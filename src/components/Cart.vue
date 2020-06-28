@@ -33,7 +33,10 @@
         />
       </div>
 
-      <div class="total">Итого: {{ total | formatPrice }}</div>
+      <div class="total">
+        <span>Итого:</span>
+        <span class="total-cost">{{ total | formatPrice }}</span>
+      </div>
     </template>
   </div>
 </template>
@@ -101,5 +104,18 @@
     padding: 4px 10px;
     margin: 10px auto;
     border-radius: 4px;
+  }
+
+  .total {
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.5em;
+    margin: 40px 20px 0;
+  }
+
+  .total-cost {
+    width: 200px;
+    margin-left: 20px;
+    display: inline-block;
   }
 </style>
