@@ -23,7 +23,15 @@ export default {
   },
   async created() {
     await this.loadAllProducts()
-    await this.loadAvailableProducts()
+    this.recursiveLoadData()
+  },
+  destroyed() {
+    clearTimeout(this.dataLoadTimeout)
+  },
+  data: function() {
+    return {
+      dataLoadTimeout: null,
+    }
   },
   methods: {
     async loadAllProducts() {
@@ -47,7 +55,6 @@ export default {
       try {
         response = await api.getAvailableProducts()
       } catch (e) {
-        alert('Failed to load available products')
         console.warn('Failed to load available products:', e)
       }
 
@@ -55,6 +62,13 @@ export default {
         const products = response.Value.Goods
         this.$store.commit(MUTATIONS.SET_AVAILABLE_PRODUCTS, products)
       }
+    },
+
+    recursiveLoadData() {
+      this.loadAvailableProducts()
+        .finally(() => {
+          this.dataLoadTimeout = setTimeout(this.recursiveLoadData, 15000)
+        })
     },
   },
 }
