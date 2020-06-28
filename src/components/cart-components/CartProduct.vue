@@ -25,8 +25,9 @@
 </template>
 
 <script>
-  import formatPrice from '../../filters/priceFormatter'
   import { MUTATIONS } from '../../store'
+  import formatPrice from '../../filters/priceFormatter'
+  import parsePrice from '../../services/priceParser'
 
   export default {
     name: 'CartProduct',
@@ -54,7 +55,7 @@
     },
     computed: {
       cost: function () {
-        return this.price * this.itemsCount
+        return parsePrice(this.price * this.itemsCount)
       },
       canIncreaseCount: function () {
         return this.$store.getters.canAddProductToCart(this.productId)
@@ -124,7 +125,7 @@
   }
 
   .count {
-    width: 40px;
+    width: 50px;
     height: 30px;
     text-align: right;
     box-sizing: border-box;

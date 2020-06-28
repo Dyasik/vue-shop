@@ -42,9 +42,11 @@
 </template>
 
 <script>
+  import CartProduct from './cart-components/CartProduct';
+
   import { MUTATIONS } from '../store'
   import formatPrice from '../filters/priceFormatter'
-  import CartProduct from './cart-components/CartProduct';
+  import parsePrice from '../services/priceParser'
 
   export default {
     name: 'Cart',
@@ -57,10 +59,10 @@
         return !Object.keys(this.$store.getters.cartProducts).length
       },
       total: function () {
-        // TODO: migrate to BigInt
         return Object.values(this.cartProducts)
           .flat()
-          .reduce((sum, cartItem) => sum + cartItem.product.price * cartItem.count, 0)
+          .reduce((sum, cartItem) =>
+            parsePrice(sum + cartItem.product.price * cartItem.count), 0)
       },
     },
     methods: {
