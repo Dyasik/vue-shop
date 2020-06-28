@@ -2,7 +2,7 @@
   <div class="cart-product">
     <div class="name">{{ name }}</div>
     <div class="price">{{ price | formatPrice }}</div>
-    <div>&times;</div>
+    <div class="times">&times;</div>
     <input
         type="number"
         step="1"
@@ -101,6 +101,7 @@
   .count {
     width: 40px;
     text-align: right;
+    box-sizing: border-box;
   }
 
   .cost {
@@ -112,5 +113,36 @@
   .remove {
     cursor: pointer;
     margin-left: 15px;
+  }
+
+  @media screen and (max-width: 800px) {
+    .cart-product {
+      flex-wrap: wrap;
+      padding: 20px 0;
+    }
+
+    .cart-product > * {
+      margin: 10px 0;
+    }
+
+    .name {
+      flex-basis: 100%;
+    }
+
+    .price {
+      width: 50%;
+    }
+
+    .times {
+      width: 20%;
+    }
+
+    .count {
+      width: 30%;
+    }
+
+    .cost {
+      width: unset;
+    }
   }
 </style>

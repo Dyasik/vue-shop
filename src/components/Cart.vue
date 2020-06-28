@@ -102,7 +102,7 @@
     background-color: #444;
     width: fit-content;
     padding: 4px 10px;
-    margin: 10px auto;
+    margin: 15px auto 5px;
     border-radius: 4px;
   }
 
