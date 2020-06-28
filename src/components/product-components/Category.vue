@@ -67,7 +67,7 @@
 
   @media screen and (max-width: 800px) {
     .category {
-      flex-basis: calc(100% - 10px);
+      flex-basis: 100%;
     }
 
     .body {
